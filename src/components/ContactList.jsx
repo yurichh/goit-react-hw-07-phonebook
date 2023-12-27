@@ -5,7 +5,6 @@ import ContactItem from './ContactItem';
 
 const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
-  console.log('filteredContacts', filteredContacts);
   return (
     <ul className="contacts-list">
       {filteredContacts.map(contact => (
