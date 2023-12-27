@@ -5,9 +5,10 @@ import ContactItem from './ContactItem';
 
 const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
+  const reversedContacts = [...filteredContacts].reverse();
   return (
     <ul className="contacts-list">
-      {filteredContacts.map(contact => (
+      {reversedContacts.map(contact => (
         <ContactItem key={contact.id} contactData={contact} />
       ))}
     </ul>
