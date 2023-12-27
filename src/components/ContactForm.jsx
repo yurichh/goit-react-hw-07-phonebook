@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../redux/contactsSlice';
 import { selectContacts } from '../redux/selectors';
+import { addContact } from '../redux/operations';
 
 const ContactForm = () => {
-  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const [state, setState] = useState({ name: '', number: '' });
+  const [state, setState] = useState({ name: '', phone: '' });
+  const dispatch = useDispatch();
 
   const checkNameForRepeat = contactName => {
     return contacts.some(
@@ -28,10 +27,11 @@ const ContactForm = () => {
     }
     dispatch(addContact(obj));
   };
+
   const createContactObj = e => {
     e.preventDefault();
 
-    if (!state.name || !state.number) {
+    if (!state.name || !state.phone) {
       Notiflix.Notify.warning('Ooops... Something missed', {
         position: 'center-top',
         distance: '50px',
@@ -40,15 +40,10 @@ const ContactForm = () => {
       });
       return;
     }
-
-    const newContactObj = {
-      ...state,
-      id: nanoid(),
-    };
-
-    handleAddContact(newContactObj);
-    setState({ name: '', number: '' });
+    handleAddContact(state);
+    setState({ name: '', phone: '' });
   };
+
   const handleChange = ({ target: { name, value } }) => {
     setState(prev => ({ ...prev, [name]: value }));
   };
@@ -74,9 +69,9 @@ const ContactForm = () => {
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
         onChange={handleChange}
         type="tel"
-        name="number"
+        name="phone"
         required
-        value={state.number}
+        value={state.phone}
         className="add-input"
       />
       <button className="add-btn" type="submit" onClick={createContactObj}>

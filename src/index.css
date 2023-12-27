@@ -93,7 +93,7 @@ code {
 
 .contacts-item {
   width: 90%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   border: 1px solid rgba(179, 179, 179, 0.676);
   border-radius: 5px;
@@ -123,7 +123,7 @@ code {
   border-radius: 50%;
   display: inline-block;
   position: absolute;
-  top: 47%;
+  top: 60%;
   left: 47%;
   border: 8px solid;
   border-color: #000000 #010101 transparent;
